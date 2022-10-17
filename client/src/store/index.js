@@ -41,7 +41,7 @@ export const useGlobalStore = () => {
         newListCounter: 0,
         listNameActive: false,
         listForDeletion: null,
-        currentModal: currentModal.NONE
+        currentModal: currentModal.NONE,
     });
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
@@ -216,12 +216,48 @@ export const useGlobalStore = () => {
         }
         asyncMoveSong();
     }
+    store.deletePlaylist = function () {
+        async function asyncDeletePlaylist() {
+            console.log("Inside deletePlaylist")
+            console.log(store.listForDeletion)
+            const response = await api.deletePlaylistById(store.listForDeletion._id);
+            if (response.data.success) {
+                storeReducer({
+                    type: GlobalStoreActionType.DELETE_LIST,
+                    payload: null
+                });
+                store.closeModal("delete-list-modal")
+                store.loadIdNamePairs();
+            }   
+        }
+        asyncDeletePlaylist();
+    }
+    store.createNewList = function () {
+        async function asyncCreateNewList() {
+            let name = "Untitled" + (store.newListCounter+1);
+            const response = await api.createPlaylist({name: name, songs: []})
+            if (response.data.success){
+                let playlist = response.data.playlists;
+                if (response.data.success) {
+                    storeReducer({
+                        type: GlobalStoreActionType.CREATE_NEW_LIST,
+                        payload: playlist
+                    })
+                    store.newListCounter += 1
+                    store.loadIdNamePairs()
+                }
+            }
+        }
+        asyncCreateNewList()
+    }
     store.markListForDeletion = function(id) {
         console.log("inside markListForDeletion", id);
         storeReducer({
             type: GlobalStoreActionType.DELETE_LIST_MODAL,
             payload: id
         })
+        console.log(id)
+        console.log(store.listForDeletion)
     }
     store.getListMarkedForDeletion = function() {
         if(store.listForDeletion) {
