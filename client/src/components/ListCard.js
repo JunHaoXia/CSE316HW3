@@ -50,6 +50,7 @@ function ListCard(props) {
         setText(event.target.value );
     }
     function handleDeleteList(event){
+        console.log("Pressed Delete List")
         store.markListForDeletion(idNamePair)
     }
     let selectClass = "unselected-list-card";

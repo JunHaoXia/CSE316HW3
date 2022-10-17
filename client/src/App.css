@@ -178,6 +178,105 @@ input {
   opacity: 1;
 }
 
+.modal-north {
+  font-size:28pt;
+  font-weight: bold;
+  background-color: #669966;
+  color:white;
+}
+
+.modal-center {
+  display: grid;
+  grid-template-columns: 30% 65%;
+  grid-template-rows: 33% 33% 33%;
+  gap: 10px 20px;
+  font-size: 30pt;
+}
+
+span {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.modal-south {
+  display:flex;
+  flex-direction: row;
+  background-color: lightgray;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-center-content {
+  grid-column: 1 / 3;
+  grid-row: 1 / 4;
+}
+
+.modal-prompt {  
+  font-size:28pt;
+  font-weight: bold;
+}
+
+.modal-textfield {
+  font-size:28pt;
+}
+
+.modal-button {
+  font-size: 15pt;
+}
+
+.modal-input{
+  font-size: 14pt;
+}
+
+.modal-text-input {
+  float: right;
+}
+#title-prompt {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+#edit-song-modal-title-textfield {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+#artist-prompt {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+#edit-song-modal-artist-textfield {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+
+#you-tube-id-prompt {
+  grid-column: 1 / 2;
+  grid-row: 3 / 4;
+}
+
+#edit-song-modal-youTubeId-textfield {
+  grid-column: 2 / 3;
+  grid-row: 3 / 4;
+}
+
+.confirm-cancel-box {
+  grid-column: 1 / 3;
+  grid-row: 3 / 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-button {
+  margin:5px;
+}
+
+.modal p + p {
+  margin-top: 1rem;
+}
 .modal-dialog {
   position: relative;
   max-width: 800px;
