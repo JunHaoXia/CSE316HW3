@@ -12,7 +12,8 @@ function PlaylistCards() {
     const { store } = useContext(GlobalStoreContext);
     store.history = useHistory();
     console.log(store.history)
-    console.log("Current List is; " + store.currentList)
+    console.log("Current List is: ")
+    console.log(store.currentList)
     return (
         <div id="playlist-cards">
         {
