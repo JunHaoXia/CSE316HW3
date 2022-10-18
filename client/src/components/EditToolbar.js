@@ -35,7 +35,9 @@ function EditToolbar() {
     }
     let editStatus = false;
     if (store.currentList) {
-        editStatus = true;
+        if(!(store.hasModal)){
+            editStatus = true;
+        }
     }
     return (
         <span id="edit-toolbar">

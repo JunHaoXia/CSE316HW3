@@ -50,6 +50,7 @@ export const useGlobalStore = () => {
         editMode: false,
         songForEdit: null,
         songForDelete: null,
+        hasModal: false,
     });
 
     // HERE'S THE DATA STORE'S REDUCER, IT MUST
@@ -69,6 +70,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: store.songForDelete,
+                    hasModal: false,
                 });
             }
             // STOP EDITING THE CURRENT LIST
@@ -83,6 +85,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: store.songForDelete,
+                    hasModal: false,
                 })
             }
             // CREATE A NEW LIST
@@ -97,6 +100,7 @@ export const useGlobalStore = () => {
                     editMode: true,
                     songForEdit: null,
                     songForDelete: store.songForDelete,
+                    hasModal: false,
                 })
             }
             // GET ALL THE LISTS SO WE CAN PRESENT THEM
@@ -111,6 +115,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: null,
+                    hasModal: false,
                 });
             }
             // UPDATE A LIST
@@ -125,6 +130,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: null,
+                    hasModal: false,
                 });
             }
             // START EDITING A LIST NAME
@@ -139,6 +145,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: null,
+                    hasModal: false,
                 });
             }
             //READY FOR DELETE LIST MODAL
@@ -153,6 +160,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: null,
+                    hasModal: true,
                 })
             }
             //READY FOR EDIT SONG MODAL
@@ -167,6 +175,7 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: payload,
                     songForDelete: null,
+                    hasModal: true,
                 })
             }
             //READY FOR DELETE SONG MODAL
@@ -181,6 +190,21 @@ export const useGlobalStore = () => {
                     editMode: false,
                     songForEdit: null,
                     songForDelete: payload,
+                    hasModal: true,
+                })
+            }
+            case GlobalStoreActionType.CLOSE_MODAL: {
+                return setStore({
+                    idNamePairs: store.idNamePairs,
+                    currentList: store.currentList,
+                    newListCounter: store.newListCounter,
+                    listNameActive: false,
+                    listForDeletion: null,
+                    currentModal: currentModal.NONE,
+                    editMode: false,
+                    songForEdit: null,
+                    songForDelete: null,
+                    hasModal: false,
                 })
             }
             default:
