@@ -8,8 +8,8 @@ function DeleteSongModal() {
 
     function handleConfirmModal(event){
         event.stopPropagation();
-        //store.addDeleteSongTransaction(store.getMarkedSongIndex(), store.getMarkedSong());
-        store.deleteSongAt(store.getSongMarkedForDeletionIndex())
+        store.addDeleteSongTransaction(store.getSongMarkedForDeletionIndex(), store.getSongMarkedForDeletion());
+        //store.deleteSongAt(store.getSongMarkedForDeletionIndex())
     }
 
     function handleCancelModal(event){

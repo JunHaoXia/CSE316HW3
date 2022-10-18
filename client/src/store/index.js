@@ -1,6 +1,10 @@
 import { createContext, useState } from 'react'
 import jsTPS from '../common/jsTPS'
 import api from '../api'
+import MoveSong_Transaction from '../transactions/MoveSong_Transaction.js'
+import AddSong_Transaction from '../transactions/AddSong_Transaction.js'
+import DeleteSong_Transaction from '../transactions/DeleteSong_Transaction.js'
+import EditSong_Transaction from '../transactions/EditSong_Transaction.js'
 export const GlobalStoreContext = createContext({});
 /*
     This is our global data store. Note that it uses the Flux design pattern,
@@ -353,6 +357,7 @@ export const useGlobalStore = () => {
         }
         asyncCreateNewList()
     }
+    //MARKING SONGS & LISTS FOR FUNCTIONS
     store.markListForDeletion = function(id) {
         console.log("inside markListForDeletion", id);
         storeReducer({
@@ -376,6 +381,7 @@ export const useGlobalStore = () => {
             payload: song_and_index
         })
     }
+    //METHOD FUNCTIONS FOR VARIABLE INFORMATION
     store.getSongMarkedForEdit = function (){
         if(store.songForEdit){
             return store.songForEdit.song;
@@ -403,6 +409,7 @@ export const useGlobalStore = () => {
             return store.listForDeletion.name;
         }
     }
+    //CHECKS IF THE MODALS SHOULD BE OPEN
     store.isDeleteListModalOpen = () => {
         console.log("inside isDeleteListModalOpen")
         return store.currentModal === currentModal.DELETE_LIST;
@@ -419,6 +426,7 @@ export const useGlobalStore = () => {
             type: GlobalStoreActionType.CLOSE_CURRENT_LIST,
             payload: {}
         });
+        tps.clearAllTransactions();
     }
     store.closeModal = (modal) => {
         document.getElementById(modal).classList.remove("is-visible");
@@ -471,6 +479,14 @@ export const useGlobalStore = () => {
     store.redo = function () {
         tps.doTransaction();
     }
+    //not sure if needed yet
+    store.hasTransactionToRedo = function (){
+        return tps.hasTransactionToRedo()
+    }
+    store.hasTransactionToUndo = function () {
+        return tps.hasTransactionToUndo()
+    }
+    //lonely boy
     store.addSong = function (index,song) {
         async function asyncAddSong() {
             let response = await api.getPlaylistById(store.currentList._id);
@@ -502,7 +518,24 @@ export const useGlobalStore = () => {
         }
         asyncAddSong()
     }
-
+    //TRANSACTIONS
+    store.addMoveSongTransaction = function (source, target) {
+        let transaction = new MoveSong_Transaction(store, source, target);
+        tps.addTransaction(transaction);
+        console.log("move song transaction added")
+    }
+    store.addSongTransaction = function (index, song) {
+        let transaction = new AddSong_Transaction(store, index, song);
+        tps.addTransaction(transaction);
+    }
+    store.addDeleteSongTransaction = function (index, song) {
+        let transaction = new DeleteSong_Transaction(store, index, song)
+        tps.addTransaction(transaction);
+    }
+    store.addEditSongTransaction = function (index, oldSong, newSong){
+        let transaction = new EditSong_Transaction(store, index, oldSong, newSong)
+        tps.addTransaction(transaction);
+    }
     // THIS FUNCTION ENABLES THE PROCESS OF EDITING A LIST NAME
     store.setlistNameActive = function () {
         storeReducer({

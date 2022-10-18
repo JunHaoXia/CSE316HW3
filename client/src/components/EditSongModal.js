@@ -23,8 +23,8 @@ function EditSongModal() {
             "artist": newArtist,
             "youTubeId": newYouTubeId
         };
-        //store.addEditSongTransaction(store.getMarkedSongIndex(), oldSong, newSong);
-        store.editSongAt(store.getSongMarkedForEditIndex(),newSong)
+        store.addEditSongTransaction(store.getSongMarkedForEditIndex(), oldSong, newSong);
+        //store.editSongAt(store.getSongMarkedForEditIndex(),newSong)
     }
 
     function handleCancelModal(event){

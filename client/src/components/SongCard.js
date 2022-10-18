@@ -33,7 +33,7 @@ function SongCard(props) {
         event.preventDefault();
         let targetId = props.index;
         let sourceId = event.dataTransfer.getData("song")
-        store.moveSong(targetId, sourceId)
+        store.addMoveSongTransaction(targetId, sourceId)
 
         setDragActive(false);
         setDragTo(false);

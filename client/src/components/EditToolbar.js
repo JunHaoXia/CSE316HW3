@@ -30,7 +30,7 @@ function EditToolbar() {
                 "artist": "Unknown",
                 "youTubeId": "dQw4w9WgXcQ"
             }
-            store.addSong(store.getPlaylistSize(), song);
+            store.addSongTransaction(store.getPlaylistSize(), song);
         }
     }
     let editStatus = false;
