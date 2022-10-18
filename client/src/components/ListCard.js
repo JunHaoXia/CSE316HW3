@@ -45,8 +45,12 @@ function ListCard(props) {
     function handleKeyPress(event) {
         if (event.code === "Enter") {
             let id = event.target.id.substring("list-".length);
+            store.hasModal = true;
             store.changeListName(id, text);
             toggleEdit();
+            store.hasModal = true;
+            console.log(store.hasModal)
+            console.log("inside after changeListName");
         }
     }
     function handleUpdateText(event) {

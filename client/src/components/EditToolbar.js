@@ -33,9 +33,17 @@ function EditToolbar() {
             store.addSongTransaction(store.getPlaylistSize(), song);
         }
     }
+    let undoStatus = false;
+    let redoStatus = false;
     let editStatus = false;
-    if (store.currentList) {
-        if(!(store.hasModal)){
+    if(!store.hasModal) {
+        if(store.currentList) {
+            if(store.hasTransactionToRedo()){
+                redoStatus = true;
+            }
+            if(store.hasTransactionToUndo()){
+                undoStatus = true;
+            }
             editStatus = true;
         }
     }
@@ -52,7 +60,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='undo-button'
-                disabled={!editStatus}
+                disabled={!undoStatus}
                 value="⟲"
                 className={enabledButtonClass}
                 onClick={handleUndo}
@@ -60,7 +68,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='redo-button'
-                disabled={!editStatus}
+                disabled={!redoStatus}
                 value="⟳"
                 className={enabledButtonClass}
                 onClick={handleRedo}
