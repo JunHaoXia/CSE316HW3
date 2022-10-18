@@ -38,7 +38,10 @@ function ListCard(props) {
         }
         setEditActive(newActive);
     }
-
+    // if (store.editMode) {
+    //         let newActive = !editActive;
+    //         setEditActive(newActive);
+    // }
     function handleKeyPress(event) {
         if (event.code === "Enter") {
             let id = event.target.id.substring("list-".length);

@@ -24,10 +24,17 @@ function EditToolbar() {
         store.closeCurrentList();
     }
     function handleAddSong() {
-        store.addSong();
+        if(store.currentList){
+            let song = {
+                "title": "Untitled",
+                "artist": "Unknown",
+                "youTubeId": "dQw4w9WgXcQ"
+            }
+            store.addSong(store.getPlaylistSize(), song);
+        }
     }
     let editStatus = false;
-    if (store.isListNameEditActive) {
+    if (store.currentList) {
         editStatus = true;
     }
     return (
@@ -35,7 +42,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='add-song-button'
-                disabled={editStatus}
+                disabled={!editStatus}
                 value="+"
                 className={enabledButtonClass}
                 onClick={handleAddSong}
@@ -43,7 +50,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='undo-button'
-                disabled={editStatus}
+                disabled={!editStatus}
                 value="⟲"
                 className={enabledButtonClass}
                 onClick={handleUndo}
@@ -51,7 +58,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='redo-button'
-                disabled={editStatus}
+                disabled={!editStatus}
                 value="⟳"
                 className={enabledButtonClass}
                 onClick={handleRedo}
@@ -59,7 +66,7 @@ function EditToolbar() {
             <input
                 type="button"
                 id='close-button'
-                disabled={editStatus}
+                disabled={!editStatus}
                 value="&#x2715;"
                 className={enabledButtonClass}
                 onClick={handleClose}

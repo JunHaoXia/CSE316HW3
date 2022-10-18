@@ -38,6 +38,13 @@ function SongCard(props) {
         setDragActive(false);
         setDragTo(false);
     }
+    function handleDoubleClick(event) {
+        console.log("double clicked")
+        store.markSongForEdit({song: song, index: index});
+    }
+    function handleDeleteSong(event) {
+        store.markSongForDeletion({song: song, index: index});
+    }
     console.log(song)
     return (
         <div
@@ -50,6 +57,7 @@ function SongCard(props) {
             onDragEnter={handleDragEnter}
             onDragLeave={handleDragLeave}
             onDrop = {handleDrop}
+            onDoubleClick={handleDoubleClick}
         >
             {index + 1}.
             <a
@@ -63,6 +71,7 @@ function SongCard(props) {
                 id={"remove-song-" + index}
                 className="list-card-button"
                 value={"\u2715"}
+                onClick={handleDeleteSong}
             />
         </div>
     );
