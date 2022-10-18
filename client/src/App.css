@@ -104,6 +104,7 @@ body {
 
 #add-list-button {
   float:left;
+  font-size:18pt;
 }
 
 .list-card, .selected-list-card, .unselected-list-card {
