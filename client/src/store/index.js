@@ -243,6 +243,7 @@ export const useGlobalStore = () => {
                     }
                 }
                 updateList(playlist);
+                store.hasModal = false;
             }
         }
         asyncChangeListName(id);
